@@ -1,2 +1,2 @@
-# sf-ajax-block
+# js-ajax-block
 AjaxBlock extension for ITEJSBundle
