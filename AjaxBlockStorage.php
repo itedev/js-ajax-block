@@ -5,7 +5,6 @@ namespace ITE\Js\AjaxBlock;
 /**
  * Class AjaxBlockStorage
  *
- * @package ITE\Js\AjaxBlock
  * @author  sam0delkin <t.samodelkin@gmail.com>
  */
 class AjaxBlockStorage

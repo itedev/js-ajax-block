@@ -7,7 +7,6 @@ use Twig_Compiler;
 /**
  * Class AjaxBlockReferenceNode
  *
- * @package ITE\Js\AjaxBlock\Twig\Node
  * @author  sam0delkin <t.samodelkin@gmail.com>
  */
 class AjaxBlockReferenceNode extends \Twig_Node_BlockReference

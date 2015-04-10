@@ -1,7 +1,10 @@
 (function($) {
   $(document).on('ite-ajax-loaded.content', function (e, contentData) {
-    var blocks = 'undefined' !== typeof contentData._sf_blocks ? contentData._sf_blocks : [];
+    if (!contentData.hasOwnProperty('_sf_blocks')) {
+      return;
+    }
 
+    var blocks = contentData['_sf_blocks'];
     $.each(blocks, function(selector, blockData) {
       var $element = $(selector);
 
@@ -23,8 +26,8 @@
         $element.trigger('ite-shown.block', blockData);
       };
 
-      var showAnimationLength = blockData.show_animation.length;
-      switch (blockData.show_animation.type.toLowerCase()) {
+      var showAnimationLength = blockData['show_animation']['length'];
+      switch (blockData['show_animation']['type'].toLowerCase()) {
         case 'fade':
           $content.fadeIn(showAnimationLength, afterShow);
           break;

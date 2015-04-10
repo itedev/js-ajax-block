@@ -2,7 +2,6 @@
 
 namespace ITE\Js\AjaxBlock;
 
-
 use ITE\Js\AjaxBlock\Annotation\AjaxBlock;
 use ITE\JsBundle\EventListener\Event\AjaxRequestEvent;
 use ITE\JsBundle\SF\SFExtension;
@@ -18,7 +17,6 @@ use Symfony\Component\Templating\TemplateReference;
 /**
  * Class AjaxBlockExtension
  *
- * @package ITE\Js\AjaxBlock
  * @author  sam0delkin <t.samodelkin@gmail.com>
  */
 class AjaxBlockExtension extends SFExtension
@@ -150,7 +148,8 @@ class AjaxBlockExtension extends SFExtension
         $builder = new TreeBuilder();
 
         $node = $builder->root('ajax_block');
-            $node->canBeEnabled()
+        $node
+            ->canBeEnabled()
                 ->children()
                     ->arrayNode('show_animation')
                         ->addDefaultsIfNotSet()
@@ -169,10 +168,9 @@ class AjaxBlockExtension extends SFExtension
                     ->end()
                 ->end()
             ->end()
-            ;
+        ;
 
         return $node;
     }
-
 
 }

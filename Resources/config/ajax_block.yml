@@ -1,7 +1,7 @@
 parameters:
-    ite_js.ajax_block.renderer.class: ITE\Js\AjaxBlock\AjaxBlockRenderer
+    ite_js.ajax_block.renderer.class:       ITE\Js\AjaxBlock\AjaxBlockRenderer
     ite_js.twig.ajax_block_extension.class: ITE\Js\AjaxBlock\Twig\Extension\AjaxBlockExtension
-    ite_js.ajax_block.sf_extension.class: ITE\Js\AjaxBlock\AjaxBlockExtension
+    ite_js.sf.extension.ajax_block.class:   ITE\Js\AjaxBlock\AjaxBlockExtension
 
 services:
     ite_js.ajax_block.renderer:
@@ -13,8 +13,8 @@ services:
         tags:
             - { name: twig.extension }
 
-    ite_js.ajax_block.sf_extension:
-        class: %ite_js.ajax_block.sf_extension.class%
+    ite_js.sf.extension.ajax_block:
+        class: %ite_js.sf.extension.ajax_block.class%
         arguments: [ @ite_js.ajax_block.renderer, %ite_js.ajax_block.options% ]
         tags:
             - { name: ite_js.sf.extension, alias: ajax_block }

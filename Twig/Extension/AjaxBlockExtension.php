@@ -1,16 +1,13 @@
 <?php
 
-
 namespace ITE\Js\AjaxBlock\Twig\Extension;
 
 use ITE\Js\AjaxBlock\AjaxBlockStorage;
 use ITE\Js\AjaxBlock\Twig\TokenParser\AjaxBlockTokenParser;
 
-
 /**
  * Class AjaxBlockExtension
  *
- * @package ITE\Js\AjaxBlock\Twig\Extension
  * @author  sam0delkin <t.samodelkin@gmail.com>
  */
 class AjaxBlockExtension extends \Twig_Extension
@@ -20,9 +17,9 @@ class AjaxBlockExtension extends \Twig_Extension
      */
     public function getTokenParsers()
     {
-        return array(
+        return [
             new AjaxBlockTokenParser(),
-        );
+        ];
     }
 
     /**

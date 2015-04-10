@@ -12,7 +12,6 @@ use Twig_Token;
 /**
  * Class AjaxBlockTokenParser
  *
- * @package ITE\Js\AjaxBlock\Twig\TokenParser
  * @author  sam0delkin <t.samodelkin@gmail.com>
  */
 class AjaxBlockTokenParser extends \Twig_TokenParser_Block

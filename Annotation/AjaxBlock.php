@@ -1,10 +1,5 @@
 <?php
-/**
- * This file is created by sam0delkin (t.samodelkin@gmail.com).
- * IT-Excellence (http://itedev.com)
- * Date: 13.03.2015
- * Time: 10:36
- */
+
 
 namespace ITE\Js\AjaxBlock\Annotation;
 
@@ -13,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationAnnotation;
 /**
  * Class AjaxBlock
  *
- * @package ITE\Js\AjaxBlock\Annotation
  * @author  sam0delkin <t.samodelkin@gmail.com>
  * @Annotation()
  */
