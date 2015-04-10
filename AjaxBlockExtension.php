@@ -7,6 +7,7 @@ use ITE\Js\AjaxBlock\Annotation\AjaxBlock;
 use ITE\JsBundle\EventListener\Event\AjaxRequestEvent;
 use ITE\JsBundle\SF\SFExtension;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
@@ -144,32 +145,33 @@ class AjaxBlockExtension extends SFExtension
     /**
      * @inheritdoc
      */
-    public function addConfiguration(ArrayNodeDefinition $pluginsNode, ContainerBuilder $container)
+    public function getConfiguration(ContainerBuilder $container)
     {
-        $pluginsNode
-            ->children()
-                ->arrayNode('ajax_block')
-                    ->canBeEnabled()
-                    ->children()
-                        ->arrayNode('show_animation')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->enumNode('type')
-                                    ->defaultValue('show')
-                                    ->values(array('show', 'slide', 'fade'))
-                                    ->info('animation type')
-                                ->end()
-                                ->integerNode('length')
-                                    ->defaultValue(0)
-                                    ->min(0)
-                                    ->info('time in ms')
-                                ->end()
+        $builder = new TreeBuilder();
+
+        $node = $builder->root('ajax_block');
+            $node->canBeEnabled()
+                ->children()
+                    ->arrayNode('show_animation')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->enumNode('type')
+                                ->defaultValue('show')
+                                ->values(array('show', 'slide', 'fade'))
+                                ->info('animation type')
+                            ->end()
+                            ->integerNode('length')
+                                ->defaultValue(0)
+                                ->min(0)
+                                ->info('time in ms')
                             ->end()
                         ->end()
                     ->end()
                 ->end()
             ->end()
-        ;
+            ;
+
+        return $node;
     }
 
 
