@@ -59,17 +59,12 @@ class AjaxBlockExtension extends SFExtension
             return;
         }
 
-        $configuration = $request->attributes->get('_ajax_block');
-
-        if (count($configuration) === 1) {
-            $single = true;
-        } else {
-            $single = false;
-        }
+        $annotations = $request->attributes->get('_ajax_block');
+        $single = 1 === count($annotations);
 
         $blocks = [];
         /** @var AjaxBlock $annotation */
-        foreach ($configuration as $annotation) {
+        foreach ($annotations as $annotation) {
             $content = $this->renderer->render(
                 $this->getTemplate($request, $annotation),
                 $annotation->getBlockName(),
@@ -77,9 +72,9 @@ class AjaxBlockExtension extends SFExtension
             );
 
             if ($single && !$annotation->getSelector()) {
-                $event->overrideResponse(new Response($content));
+                $event->setContent($content);
 
-                return;
+                continue;
             }
 
             if (!$annotation->getSelector()) {
@@ -100,31 +95,9 @@ class AjaxBlockExtension extends SFExtension
             ];
         }
 
-        $event->addAjaxData('blocks', $blocks);
-    }
-
-    /**
-     * @param Request   $request
-     * @param AjaxBlock $configuration
-     * @return string
-     */
-    protected function getTemplate(Request $request, AjaxBlock $configuration)
-    {
-        if ($configuration->getTemplate()) {
-            return $configuration->getTemplate();
+        if (!empty($blocks)) {
+            $event->addAjaxData('blocks', $blocks);
         }
-
-        /** @var TemplateReference $template */
-        $template = $request->attributes->get('_template');
-        if (!$template) {
-            throw new \InvalidArgumentException('You should set template for render ajax_block.');
-        }
-        $originalFormat = $template->get('format');
-        $template->set('format', 'html');
-        $templateName = $template->getPath();
-        $template->set('format', $originalFormat);
-
-        return $templateName;
     }
 
     /**
@@ -173,4 +146,27 @@ class AjaxBlockExtension extends SFExtension
         return $node;
     }
 
+    /**
+     * @param Request   $request
+     * @param AjaxBlock $configuration
+     * @return string
+     */
+    protected function getTemplate(Request $request, AjaxBlock $configuration)
+    {
+        if ($configuration->getTemplate()) {
+            return $configuration->getTemplate();
+        }
+
+        /** @var TemplateReference $template */
+        $template = $request->attributes->get('_template');
+        if (!$template) {
+            throw new \InvalidArgumentException('You should set template for render ajax_block.');
+        }
+        $originalFormat = $template->get('format');
+        $template->set('format', 'html');
+        $templateName = $template->getPath();
+        $template->set('format', $originalFormat);
+
+        return $templateName;
+    }
 }
