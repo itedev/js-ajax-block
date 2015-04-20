@@ -74,7 +74,7 @@ class AjaxBlockExtension extends SFExtension
             if ($single && !$annotation->getSelector()) {
                 $event->setContent($content);
 
-                continue;
+                return;
             }
 
             if (!$annotation->getSelector()) {
