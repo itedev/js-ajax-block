@@ -1,10 +1,10 @@
 (function($) {
-  $(document).on('ite-ajax-loaded.content', function (e, contentData) {
-    if (!contentData.hasOwnProperty('_sf_blocks')) {
+  $(document).on('ite-pre-ajax-complete', function (e, data) {
+    if (!data.hasOwnProperty('blocks')) {
       return;
     }
 
-    var blocks = contentData['_sf_blocks'];
+    var blocks = data['blocks'];
     $.each(blocks, function(selector, blockData) {
       var $element = $(selector);
 

@@ -96,7 +96,7 @@ class AjaxBlockExtension extends SFExtension
         }
 
         if (!empty($blocks)) {
-            $event->addAjaxData('blocks', $blocks);
+            $event->getAjaxDataBag()->addBodyData('blocks', $blocks);
         }
     }
 
@@ -129,7 +129,7 @@ class AjaxBlockExtension extends SFExtension
                         ->children()
                             ->enumNode('type')
                                 ->defaultValue('show')
-                                ->values(array('show', 'slide', 'fade'))
+                                ->values(['show', 'slide', 'fade'])
                                 ->info('animation type')
                             ->end()
                             ->integerNode('length')
