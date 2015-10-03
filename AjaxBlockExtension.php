@@ -17,7 +17,7 @@ use Symfony\Component\Templating\TemplateReference;
 /**
  * Class AjaxBlockExtension
  *
- * @author  sam0delkin <t.samodelkin@gmail.com>
+ * @author sam0delkin <t.samodelkin@gmail.com>
  */
 class AjaxBlockExtension extends SFExtension
 {
@@ -120,8 +120,8 @@ class AjaxBlockExtension extends SFExtension
     {
         $builder = new TreeBuilder();
 
-        $node = $builder->root('ajax_block');
-        $node
+        $rootNode = $builder->root('ajax_block');
+        $rootNode
             ->canBeEnabled()
                 ->children()
                     ->arrayNode('show_animation')
@@ -143,7 +143,7 @@ class AjaxBlockExtension extends SFExtension
             ->end()
         ;
 
-        return $node;
+        return $rootNode;
     }
 
     /**
