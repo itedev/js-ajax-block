@@ -20,6 +20,11 @@ class AjaxBlockRenderer
     protected $twig;
 
     /**
+     * @var string
+     */
+    protected $originalContent = '';
+
+    /**
      * @param \Twig_Environment $twig
      */
     public function __construct(\Twig_Environment $twig)
@@ -45,7 +50,7 @@ class AjaxBlockRenderer
         }
 
         AjaxBlockStorage::clearStorage();
-        $this->twig->render($baseTemplateName, $context);
+        $this->originalContent = $this->twig->render($baseTemplateName, $context);
 
         foreach (AjaxBlockStorage::getStorage() as $blockName => $blockContent) {
             $hash                 = $this->generateBlockHash($baseTemplateName, $blockName);
@@ -76,5 +81,15 @@ class AjaxBlockRenderer
         $hashString = $baseTemplateName . $ajaxBlockName;
 
         return md5($hashString);
+    }
+
+    /**
+     * Get originalContent
+     *
+     * @return string
+     */
+    public function getOriginalContent()
+    {
+        return $this->originalContent;
     }
 }

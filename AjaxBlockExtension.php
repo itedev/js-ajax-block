@@ -77,6 +77,13 @@ class AjaxBlockExtension extends SFExtension
                 return;
             }
 
+            // we don't need to re-render the template
+            if (null === $annotation->getTemplate()) {
+                if (empty($event->getAjaxDataBag()->getOriginalResponse())) {
+                    $event->getAjaxDataBag()->setOriginalResponse($this->renderer->getOriginalContent());
+                }
+            }
+
             if (!$annotation->getSelector()) {
                 throw new \InvalidArgumentException('You should specify selector for multiple ajaxBlock annotations.');
             }
