@@ -169,6 +169,11 @@ class AjaxBlockExtension extends SFExtension
         if (!$template) {
             throw new \InvalidArgumentException('You should set template for render ajax_block.');
         }
+
+        if (is_string($template)) {
+            return $template;
+        }
+
         $originalFormat = $template->get('format');
         $template->set('format', 'html');
         $templateName = $template->getPath();
