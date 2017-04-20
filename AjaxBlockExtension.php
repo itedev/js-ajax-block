@@ -104,6 +104,7 @@ class AjaxBlockExtension extends SFExtension
 
         if (!empty($blocks)) {
             $event->getAjaxDataBag()->addBodyData('blocks', $blocks);
+            $event->stopParentEventPropagation();
         }
     }
 
