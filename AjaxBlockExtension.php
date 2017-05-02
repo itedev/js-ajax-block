@@ -60,7 +60,7 @@ class AjaxBlockExtension extends SFExtension
         }
 
         $annotations = $request->attributes->get('_ajax_block');
-        $single = 1 === count($annotations);
+        //$single = 1 === count($annotations);
 
         $blocks = [];
         /** @var AjaxBlock $annotation */
@@ -71,10 +71,10 @@ class AjaxBlockExtension extends SFExtension
                 $event->getControllerResult()
             );
 
-            if ($single && !$annotation->getSelector()) {
+            if (!$annotation->getSelector()) {
                 $event->setContent($content);
 
-                return;
+                continue;
             }
 
             // we don't need to re-render the template
