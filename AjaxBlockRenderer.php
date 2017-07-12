@@ -38,10 +38,11 @@ class AjaxBlockRenderer
      * @param string $baseTemplateName
      * @param string $ajaxBlockName
      * @param array  $context
+     * @param bool   $optional
      *
      * @return string
      */
-    public function render($baseTemplateName, $ajaxBlockName, $context = array())
+    public function render($baseTemplateName, $ajaxBlockName, $context = array(), $optional = false)
     {
         $blockHash = $this->generateBlockHash($baseTemplateName, $ajaxBlockName);
 
@@ -58,6 +59,10 @@ class AjaxBlockRenderer
         }
 
         if (!isset($this->storage[$blockHash])) {
+            if ($optional) {
+                return false;
+            }
+
             throw new \InvalidArgumentException(
               sprintf('Ajax block "%s" was not found in the template "%s".',
               $ajaxBlockName,

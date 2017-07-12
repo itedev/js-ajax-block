@@ -68,8 +68,13 @@ class AjaxBlockExtension extends SFExtension
             $content = $this->renderer->render(
                 $this->getTemplate($request, $annotation),
                 $annotation->getBlockName(),
-                $event->getControllerResult()
+                $event->getControllerResult(),
+                $annotation->isOptional()
             );
+
+            if (false === $content && $annotation->isOptional()) {
+                continue;
+            }
 
             if (!$annotation->getSelector()) {
                 $event->setContent($content);

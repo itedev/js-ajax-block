@@ -39,6 +39,11 @@ class AjaxBlock extends ConfigurationAnnotation
     protected $showLength;
 
     /**
+     * @var bool
+     */
+    protected $optional = false;
+
+    /**
      * @return string
      */
     public function getBlockName()
@@ -116,6 +121,30 @@ class AjaxBlock extends ConfigurationAnnotation
     public function setShowLength($showLength)
     {
         $this->showLength = $showLength;
+    }
+
+    /**
+     * Get optional
+     *
+     * @return boolean
+     */
+    public function isOptional()
+    {
+        return $this->optional;
+    }
+
+    /**
+     * Set optional
+     *
+     * @param boolean $optional
+     *
+     * @return AjaxBlock
+     */
+    public function setOptional($optional)
+    {
+        $this->optional = $optional;
+
+        return $this;
     }
 
     /**
